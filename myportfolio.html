@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nolan Peel — Business Management & Leadership</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f4f0;
+      --mid: #7a7a72;
+      --rule: #d8d6d0;
+      --accent: #0a0a0a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 4rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.12em;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--rule);
+      padding-top: 5rem;
+    }
+
+    .hero-left {
+      padding: 6rem 4rem 6rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--rule);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 10vw, 9rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.9s ease forwards 0.1s;
+    }
+
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      color: var(--mid);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.3s;
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      max-width: 420px;
+      color: #444;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.5s;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.7s;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--black);
+      transition: all 0.25s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-fill {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .btn-fill:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .btn-outline:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .hero-right {
+      padding: 6rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: auto;
+    }
+
+    .stat-box {
+      padding: 2rem;
+      border: 1px solid var(--rule);
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards;
+    }
+
+    .stat-box:nth-child(1) { animation-delay: 0.4s; }
+    .stat-box:nth-child(2) { animation-delay: 0.55s; }
+    .stat-box:nth-child(3) { animation-delay: 0.7s; }
+    .stat-box:nth-child(4) { animation-delay: 0.85s; }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 6rem 4rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .section-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      color: var(--mid);
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── ABOUT ── */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-sidebar {
+      border-left: 1px solid var(--rule);
+      padding-left: 3rem;
+    }
+
+    .sidebar-item {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .sidebar-item:last-child {
+      border-bottom: none;
+    }
+
+    .sidebar-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-value {
+      font-size: 0.95rem;
+      color: var(--black);
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .exp-meta {
+      padding-top: 0.3rem;
+    }
+
+    .exp-date {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--rule);
+      color: var(--mid);
+    }
+
+    .exp-role {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-company {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1rem;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .exp-bullets li {
+      font-size: 0.92rem;
+      color: #444;
+      line-height: 1.7;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--mid);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .project-card {
+      border: 1px solid var(--rule);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: background 0.2s;
+    }
+
+    .project-card:hover { background: #faf9f6; }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-placeholder {
+      width: 100%;
+      height: 160px;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-placeholder-icon { font-size: 2.5rem; }
+
+    .project-placeholder-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .project-role {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.75;
+      margin-top: 0.4rem;
+    }
+
+    /* ── SKILLS ── */
+    .skills-list-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .skills-category {
+      border: 1px solid var(--rule);
+      padding: 2.5rem;
+    }
+
+    .skills-category-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.2rem;
+      color: var(--black);
+    }
+
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--black);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--black);
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    /* ── RESUME ── */
+    .resume-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .resume-preview {
+      display: flex;
+      justify-content: center;
+    }
+
+    .resume-preview-card {
+      width: 100%;
+      max-width: 340px;
+      border: 1px solid var(--rule);
+      padding: 2.5rem;
+      background: var(--white);
+      box-shadow: 8px 8px 0px var(--rule);
+    }
+
+    .resume-preview-top {
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .resume-preview-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+    }
+
+    .resume-preview-sub {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--mid);
+      margin-top: 0.25rem;
+    }
+
+    .resume-preview-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .resume-line {
+      height: 8px;
+      background: var(--rule);
+      border-radius: 2px;
+    }
+
+    .resume-line.wide { width: 100%; }
+    .resume-line.medium { width: 72%; }
+    .resume-line.short { width: 48%; }
+    .resume-line-gap { height: 6px; }
+
+    .resume-preview-label {
+      margin-top: 1.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-align: center;
+    }
+
+    /* ── ATHLETICS ── */
+    #athletics {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    #athletics .section-title { color: var(--white); }
+    #athletics .section-num { color: #555; }
+
+    .athletics-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .athletics-text p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #aaa;
+      margin-bottom: 1.5rem;
+    }
+
+    .athletics-quote {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      line-height: 1.4;
+      color: var(--white);
+      border-left: 2px solid #555;
+      padding-left: 2rem;
+      margin-top: 2rem;
+    }
+
+    .athletics-facts {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .fact-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 1.5rem;
+      border: 1px solid #222;
+    }
+
+    .fact-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #666;
+    }
+
+    .fact-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      color: var(--white);
+    }
+
+    /* ── CONTACT ── */
+    #contact .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
+
+    .contact-intro {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      line-height: 1.45;
+      color: var(--black);
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .contact-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      color: var(--black);
+      transition: padding-left 0.25s;
+    }
+
+    .contact-link:hover { padding-left: 0.5rem; }
+
+    .contact-link-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .contact-link-val {
+      font-size: 0.95rem;
+      color: var(--black);
+    }
+
+    .contact-link-arrow { color: var(--mid); font-size: 1.1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rule);
+    }
+
+    .footer-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      color: var(--mid);
+    }
+
+    .footer-note {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--mid);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+
+      #hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 5rem 1.5rem 3rem; border-right: none; border-bottom: 1px solid var(--rule); }
+      .hero-right { padding: 3rem 1.5rem; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+
+      section { padding: 4rem 1.5rem; }
+
+      #about .about-grid,
+      .resume-grid,
+      .athletics-grid,
+      #contact .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      .about-sidebar { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 2rem; }
+
+      .projects-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+
+      .skills-list-grid { grid-template-columns: 1fr; }
+
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+
+    @media (max-width: 560px) {
+      .hero-stats { grid-template-columns: 1fr; }
+      .skills-list-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Nolan Peel</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow"><span style="font-family:'Bebas Neue',sans-serif;font-size:0.9rem;letter-spacing:0.2em;color:var(--mid);margin-right:1rem;">01</span>Business Management & Leadership · Rutgers University · Class of 2028</p>
+      <h1 class="hero-name">NOLAN<br>PEEL</h1>
+      <p class="hero-title">Student. Athlete. Leader.</p>
+      <p class="hero-desc">
+        A Division I student-athlete and Business Management & Leadership major at Rutgers University's School of Business. Committed to excellence on the field, in the classroom, and beyond — bringing a strong work ethic forged through years of competitive sport and hands-on experience.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-fill">Get In Touch</a>
+        <a href="#experience" class="btn btn-outline">View Experience</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stats">
+        <div class="stat-box">
+          <div class="stat-num">3.76</div>
+          <div class="stat-label">GPA</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">D1</div>
+          <div class="stat-label">Athlete</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">20+</div>
+          <div class="stat-label">Hrs/Wk Training</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">98</div>
+          <div class="stat-label">Acres Managed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">About Me</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a Business Management & Leadership major at Rutgers University's School of Business, maintaining a 3.76 GPA while competing as a Division I baseball pitcher — a combination that has taught me how to perform under pressure and manage competing priorities with discipline.
+        </p>
+        <p>
+          Growing up, I developed a work ethic through real, physical labor — maintaining a 98-acre farm, running landscaping jobs, and coaching youth athletes. These experiences gave me a ground-level understanding of responsibility, reliability, and what it means to show up every day.
+        </p>
+        <p>
+          I'm driven by challenges that require both strategic thinking and follow-through — whether that's managing a full academic and athletic schedule, or stepping up in a leadership role. I'm passionate about the stock market, business strategy, and building a career where competitiveness is an asset.
+        </p>
+      </div>
+      <div class="about-sidebar">
+        <div class="sidebar-item">
+          <div class="sidebar-label">University</div>
+          <div class="sidebar-value">Rutgers University, School of Business</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-label">Degree</div>
+          <div class="sidebar-value">Business Management & Leadership</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-label">Expected Graduation</div>
+          <div class="sidebar-value">May 2028</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-label">Sport</div>
+          <div class="sidebar-value">Baseball — Pitcher, Division I</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-label">Location</div>
+          <div class="sidebar-value">New Brunswick, NJ</div>
+        </div>
+        <div class="sidebar-item">
+          <div class="sidebar-label">Interests</div>
+          <div class="sidebar-value" style="display:flex;flex-direction:column;gap:0.3rem;">
+            <span>Financial Markets & Investing</span>
+            <span>Automotive Restoration</span>
+            <span>Music</span>
+            <span>Boating & Outdoors</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Work & Experience</h2>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="exp-tag">Athletics</span>
+          <span class="exp-date">Aug 2024 – Present</span>
+        </div>
+        <div class="project-placeholder">
+          <span class="project-placeholder-icon">⚾</span>
+          <span class="project-placeholder-text">Rutgers Baseball</span>
+        </div>
+        <div class="project-role">Division I Student-Athlete</div>
+        <div class="exp-company">Rutgers University Baseball · New Brunswick, NJ</div>
+        <p class="project-desc">Competing as a pitcher for the Rutgers Baseball program while maintaining a 3.76 GPA. Committed to 20+ hours per week of training, competition, and travel — representing the university on and off the field through year-round community service events.</p>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="exp-tag">Coaching</span>
+          <span class="exp-date">Winter 2023–24</span>
+        </div>
+        <div class="project-placeholder">
+          <span class="project-placeholder-icon">🏅</span>
+          <span class="project-placeholder-text">Ascent Athlete</span>
+        </div>
+        <div class="project-role">Youth Athletic Coach</div>
+        <div class="exp-company">Ascent Athlete · Aston, PA</div>
+        <p class="project-desc">Supervised and coached co-ed youth ages 7–13 through structured training circuits, focusing on technique, skill development, and building a competitive yet supportive environment. Helped young athletes grow both physically and socially.</p>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="exp-tag">Operations</span>
+          <span class="exp-date">Summers 2022–2025</span>
+        </div>
+        <div class="project-placeholder">
+          <span class="project-placeholder-icon">🌾</span>
+          <span class="project-placeholder-text">Heron Brae Farm</span>
+        </div>
+        <div class="project-role">Farm Operations</div>
+        <div class="exp-company">Heron Brae Farm · Chesapeake City, MD</div>
+        <p class="project-desc">Managed and maintained 98 acres of farmland across multiple summers, working 8–10 hour days on grounds upkeep, equipment operation, and property management. Built a relentless work ethic through consistent, demanding physical labor.</p>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <span class="exp-tag">Leadership</span>
+          <span class="exp-date">Mar 2024</span>
+        </div>
+        <div class="project-placeholder">
+          <span class="project-placeholder-icon">🤝</span>
+          <span class="project-placeholder-text">Community Service</span>
+        </div>
+        <div class="project-role">Volunteer & NHS Secretary</div>
+        <div class="exp-company">WFW · North East, MD</div>
+        <p class="project-desc">Managed high-volume kitchen operations for monthly community wing nights while understaffed. As NHS Secretary, oversaw event planning, membership coordination, and administrative responsibilities — developing organizational and leadership skills in a real-world setting.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Skills</h2>
+    </div>
+    <div class="skills-list-grid">
+
+      <div class="skills-category">
+        <div class="skills-category-label">Business & Finance</div>
+        <div class="skills-tags">
+          <span class="skill-tag">Financial Markets</span>
+          <span class="skill-tag">Stock Market Analysis</span>
+          <span class="skill-tag">Business Strategy</span>
+          <span class="skill-tag">Microsoft Excel</span>
+          <span class="skill-tag">Microsoft Word</span>
+          <span class="skill-tag">Microsoft PowerPoint</span>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <div class="skills-category-label">Leadership & Communication</div>
+        <div class="skills-tags">
+          <span class="skill-tag">Team Leadership</span>
+          <span class="skill-tag">Public Speaking</span>
+          <span class="skill-tag">Coaching & Mentoring</span>
+          <span class="skill-tag">Event Coordination</span>
+          <span class="skill-tag">Client Relations</span>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <div class="skills-category-label">Operations & Management</div>
+        <div class="skills-tags">
+          <span class="skill-tag">Project Management</span>
+          <span class="skill-tag">Scheduling & Planning</span>
+          <span class="skill-tag">Resource Management</span>
+          <span class="skill-tag">Administrative Work</span>
+        </div>
+      </div>
+
+      <div class="skills-category">
+        <div class="skills-category-label">Other Abilities</div>
+        <div class="skills-tags">
+          <span class="skill-tag">Latin (Read & Translate)</span>
+          <span class="skill-tag">High-Pressure Performance</span>
+          <span class="skill-tag">Time Management</span>
+          <span class="skill-tag">Physical Endurance</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RESUME -->
+  <section id="resume">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Resume / CV</h2>
+    </div>
+    <div class="resume-grid">
+      <div class="resume-left">
+        <p class="contact-intro">Download a copy of my resume to save, share, or pass along to your team.</p>
+        <p style="font-size:0.92rem; color:#555; line-height:1.8; margin-bottom:2.5rem;">My resume outlines my academic background, athletic commitments, work experience, and leadership roles — all in one concise document.</p>
+        <a href="Resume_Nolan_Peel.pdf" download class="btn btn-fill" style="display:inline-flex;align-items:center;gap:0.6rem;">
+          <span>⬇</span> Download Resume (PDF)
+        </a>
+      </div>
+      <div class="resume-preview">
+        <div class="resume-preview-card">
+          <div class="resume-preview-top">
+            <div class="resume-preview-name">NOLAN PEEL</div>
+            <div class="resume-preview-sub">Business Management & Leadership · Rutgers University</div>
+          </div>
+          <div class="resume-preview-lines">
+            <div class="resume-line wide"></div>
+            <div class="resume-line medium"></div>
+            <div class="resume-line wide"></div>
+            <div class="resume-line short"></div>
+            <div class="resume-line-gap"></div>
+            <div class="resume-line wide"></div>
+            <div class="resume-line medium"></div>
+            <div class="resume-line short"></div>
+            <div class="resume-line wide"></div>
+            <div class="resume-line-gap"></div>
+            <div class="resume-line medium"></div>
+            <div class="resume-line wide"></div>
+            <div class="resume-line short"></div>
+          </div>
+          <div class="resume-preview-label">resume_nolan_peel.pdf</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Contact</h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro">Open to internships, networking conversations, and opportunities in business and finance.</p>
+        <p style="font-size:0.92rem; color:#555; line-height:1.8;">Whether you're a recruiter, fellow student, or professional — feel free to reach out. I respond promptly and take every conversation seriously.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:npeel1213@gmail.com" class="contact-link">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-val">npeel1213@gmail.com</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="tel:3025472766" class="contact-link">
+          <span class="contact-link-label">Phone</span>
+          <span class="contact-link-val">302.547.2766</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="https://www.linkedin.com/in/nolanpeel" target="_blank" class="contact-link">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-val">linkedin.com/in/nolanpeel</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="https://www.scarletknights.com/sports/baseball" target="_blank" class="contact-link">
+          <span class="contact-link-label">Athletics</span>
+          <span class="contact-link-val">Rutgers Baseball Roster</span>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Nolan Peel · 2026</span>
+    <span class="footer-note">Rutgers University · School of Business · Class of 2028</span>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Scroll-triggered animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
